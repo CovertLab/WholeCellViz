@@ -1,0 +1,32 @@
+#prevent directory indexing
+Options -Indexes 
+Options +FollowSymLinks
+
+#redirects
+RewriteEngine On
+RewriteBase		/
+RewriteRule		^LeeEtAl2013$		viz.php#LeeEtAl2013 [NE,L,NC,R]
+RewriteRule		^LeeEtAl2013Fig1$	viz.php#LeeEtAl2013Fig1 [NE,L,NC,R]
+RewriteRule		^LeeEtAl2013FigS1$	viz.php#LeeEtAl2013FigS1 [NE,L,NC,R]
+RewriteRule		^cellGrowth$		viz.php#cellGrowth [NE,L,NC,R]
+RewriteRule		^cellCycle$			viz.php#cellCycle [NE,L,NC,R]
+RewriteRule		^replication$ 		viz.php#replication [NE,L,NC,R]
+RewriteRule		^omics$				viz.php#omics [NE,L,NC,R]
+RewriteRule		^synthesis$			viz.php#synthesis [NE,L,NC,R]
+RewriteRule		^population$		viz.php#population [NE,L,NC,R]
+RewriteRule		^knockouts$			viz.php#knockouts [NE,L,NC,R]
+RewriteRule		^knockouts2$		viz.php#knockouts2 [NE,L,NC,R]
+RewriteRule		^CellShape$			viz.php#CellShape [NE,L,NC,R]
+RewriteRule		^CellShape3D$		viz.php#CellShape3D [NE,L,NC,R]
+RewriteRule		^Chromosome1$		viz.php#Chromosome1 [NE,L,NC,R]
+RewriteRule		^Chromosome2$		viz.php#Chromosome2 [NE,L,NC,R]
+RewriteRule		^ChrSpaceTime$		viz.php#ChrSpaceTime [NE,L,NC,R]
+RewriteRule		^Cytokinesis$		viz.php#Cytokinesis [NE,L,NC,R]
+RewriteRule		^GeneExp$			viz.php#GeneExp [NE,L,NC,R]
+RewriteRule		^Metabolism$		viz.php#Metabolism [NE,L,NC,R]
+RewriteRule		^NascentProtExp$	viz.php#NascentProtExp [NE,L,NC,R]
+RewriteRule		^NascentRnaExp$		viz.php#NascentRnaExp [NE,L,NC,R]
+RewriteRule		^MatureProtExp$		viz.php#MatureProtExp [NE,L,NC,R]
+RewriteRule		^MatureRnaExp$		viz.php#MatureRnaExp [NE,L,NC,R]
+RewriteRule		^RepInit$			viz.php#RepInit [NE,L,NC,R]
+RewriteRule		^Translation$		viz.php#Translation [NE,L,NC,R]

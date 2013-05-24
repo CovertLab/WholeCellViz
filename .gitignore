@@ -1,2 +1,9 @@
-.htaccess
+#temporary files
 *~
+
+#archives
+WholeCellViz.zip
+data/sim.zip
+
+#simulation data
+data/sim/*
