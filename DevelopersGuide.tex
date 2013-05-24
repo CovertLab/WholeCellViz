@@ -1,0 +1,438 @@
+\documentclass[twoside]{book}
+
+\newcommand{\isClearDoublePage}{0}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Formatting
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphics,graphicx,color}
+\usepackage[cmyk]{xcolor}
+\definecolor{natureBlue}{cmyk}{1,0.8,0,0}
+\definecolor{natureGray}{cmyk}{0,0,0,0.7}
+
+\usepackage{tabularx}% To get fixed width tables
+\usepackage{bigstrut}
+\usepackage{array}
+\usepackage{float}
+\usepackage{multicol, multirow}
+\usepackage{rotating} %sideways tables, figures
+\usepackage{placeins}
+\usepackage{tabularx, longtable}
+\usepackage{epstopdf}
+
+\setcounter{tocdepth}{1}
+
+\usepackage{appendix}
+\usepackage{pdflscape}
+\usepackage{geometry}
+\geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+
+\usepackage{lmodern}
+\usepackage[pdftex]{thumbpdf}
+\usepackage{ifthen}
+
+\usepackage{enumitem, expdlist}
+\setlist[itemize]{noitemsep, nosep, leftmargin=*}
+\setlist[enumerate]{noitemsep, nosep, leftmargin=*}
+\setlist[description]{noitemsep, nosep, leftmargin=*}
+\usepackage{verbatim}
+%\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancypagestyle{plain}{%
+	\fancyhf{}	
+	\fancyhf[FC]{\thepage}
+	\renewcommand{\headrulewidth}{0pt}
+	\renewcommand{\footrulewidth}{0pt}}
+
+\usepackage[style=nature,sortcites,url=true,doi=true,eprint=true,isbn=true]{biblatex}
+\addbibresource{../paper/references}
+
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\usepackage[titles]{tocloft}
+\renewcommand{\cftchapfont}{\bfseries\Large}
+\setlength{\cftbeforechapskip}{1ex}
+\setlength{\cftbeforesecskip}{-1.5ex}
+\setlength{\cftbeforesubsecskip}{-1.5ex}
+\setlength{\cftbeforesubsubsecskip}{-1.5ex}
+\setlength{\cftbeforeparaskip}{-1.5ex}
+\setlength{\cftparskip}{-1.5ex}
+\setlength{\cftbeforefigskip}{-1.5ex}
+\setlength{\cftbeforetabskip}{-1.5ex}
+\renewcommand{\cftdotsep}{4.5}
+\setlength{\cfttabnumwidth}{30pt}
+\setlength{\cftfignumwidth}{30pt}
+\setlength{\columnsep}{0.5in}
+
+\usepackage[compact]{titlesec}
+\usepackage[font={small,sf}, format=plain, labelformat=simple, labelfont=bf, margin=0.0in, justification=justified, singlelinecheck=true, tableposition=top, figureposition=bottom]{caption}
+
+\captionsetup[table]{skip=0.5ex}
+\captionsetup[longtable]{skip=0.5ex}
+\captionsetup[sidewaystable]{skip=0.5ex}
+\captionsetup[lstlisting]{skip=0.5ex}
+\DeclareCaptionLabelSeparator{bar}{~|~}
+\captionsetup{labelsep=bar}
+
+\setlength{\topmargin}{-.4in}
+\setlength{\textheight}{9.0in}
+\setlength{\oddsidemargin}{0in}
+\setlength{\evensidemargin}{\oddsidemargin}
+\setlength{\hoffset}{0pt}
+\setlength{\textwidth}{6.5in}
+\setlength{\headsep}{.2in}
+\setlength{\headheight}{.2in}
+\setlength{\footskip}{.4in}
+\setlength{\parindent}{0in}
+\setlength{\parskip}{.1in}
+\setlength{\hoffset}{0in}
+\setlength{\voffset}{0in}
+
+\usepackage[bookmarksnumbered=true, bookmarksopen, bookmarksopenlevel=1, bookmarksdepth=3, breaklinks=true]{hyperref}
+\hypersetup{%
+	pdftitle = {WholeCellViz: Data visualization for whole-cell models},
+	pdfsubject = {WholeCellViz user guide.},
+	pdfkeywords = {whole-cell model, systems biology, mycoplasma genitalium},
+	pdfauthor = {Ruby Lee, Jonathan R. Karr, Markus W. Covert},
+	pdfcreator = {\LaTeX\ with package \flqq hyperref\frqq},
+	pdfproducer = {pdfeTeX-0.\the\pdftexversion\pdftexrevision},
+}
+%\pdfinfo{/CreationDate (D:20111207000000-01'00')}
+\usepackage[all]{hypcap}
+
+\usepackage{listings}
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{darkgray}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{purple}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+\renewcommand{\lstlistingname}{Box}
+\renewcommand{\lstlistlistingname}{Boxes}
+\def\lstbasicfont{\small\ttfamily}
+\def\mcommentfont{\color[cmyk]{0.8348,0.2082,1,0.0776}} %comments in green
+\lstset{
+	language={},
+	keywordstyle=\bfseries,
+	commentstyle=\itshape,
+	stringstyle={},
+	framexleftmargin=0pt,
+	xleftmargin=0pt,
+	numbers=none,
+	numbersep=10pt,
+	frame=single,
+	captionpos=t,
+	numberbychapter=true}
+\lstdefinestyle{matlabflozstyle}{
+	firstnumber=1,
+	numbers=left,
+	numberfirstline=true,
+	stepnumber=5,
+	numberstyle={\tiny\color[cmyk]{0,0,0,0.7}},
+	framexleftmargin=6mm, 
+	xleftmargin=6mm,
+	numbersep=3mm,
+	language=matlabfloz,                          % use our version of highlighting
+	keywordstyle=\color[cmyk]{0.8837,0.7692,0,0}, % keywords in blue
+	commentstyle=\mcommentfont,                   % comments
+	stringstyle=\color[cmyk]{0.576,0.8064,0,0}}   % strings in purple
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% table, figure fonts
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+\renewenvironment{table}[1][1]%
+  {\renewcommand{\familydefault}{\sfdefault}\selectfont
+  \@float{table}[#1]\small}
+  {\end@float}
+\makeatother
+
+\makeatletter
+\renewenvironment{figure}[1][1]%
+  {\renewcommand{\familydefault}{\sfdefault}\selectfont
+  \@float{figure}[#1]\small}
+  {\end@float}
+\makeatother
+
+%Bullets
+\AtBeginDocument{
+  \def\labelitemii{\({\bullet}\)}
+  \def\labelitemiii{\({\bullet}\)}
+  \def\labelitemiv{\({\bullet}\)}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% section formatting
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\titlespacing{\subsection}{0pt}{*2}{*-0.5}
+\titlespacing{\subsubsection}{0pt}{1.5ex plus 0.2ex minus .2ex}{-1.6ex}
+
+\titleformat{\subsection}[hang]{\normalfont\normalsize\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}[hang]{\normalfont\normalsize\itshape}{\thesubsubsection}{1em}{}
+
+\newcommand{\subsubsubsection}[1]{\paragraph{#1}}
+\newcommand{\subsubsubsubsection}[1]{\subparagraph{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% empty pages between chapters
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+\ifthenelse{\isClearDoublePage=1}{
+	\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
+		\thispagestyle{empty}\hbox{}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}
+}{
+	\def\cleardoublepage{\clearpage}
+}
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% hyphenation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hyphenation{Pos-i-tive-In-te-ger-Field In-te-ger-Field}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Begin Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\frontmatter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Title page             %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\renewcommand{\headrulewidth}{0.5pt}
+\makeatletter
+\def\headrule{}
+\makeatother
+
+\fancyhf{}
+\setcounter{page}{1}
+
+\currentpdfbookmark{Title page}{__TITLE_PAGE__}
+\begin{center}
+\parbox{\textwidth}{\centering
+\vskip1.in
+{\Huge\textbf{WholeCellViz: Data visualization for whole-cell models}}\\
+\vskip0.3in
+}
+{\Large Ruby Lee$^{1,\dagger}$, Jonathan R. Karr$^{2,\dagger}$ \& Markus W. Covert$^{1*}$}
+\vskip0.2in
+\parbox{1.1\textwidth}{\raggedright
+$^1$Department of Bioengineering, Stanford University, and
+$^2$Graduate Program in Biophysics, Stanford University, 318 Campus Drive West, Stanford CA 94305, USA.\\
+\vskip2ex
+$^\dagger$These authors contributed equally to this work.\\
+$^*$To whom correspondence should be addressed. Email: \href{mailto:mcovert@stanford.edu}{mcovert@stanford.edu}.
+}
+\vskip0.6in
+\parbox{\textwidth}{
+	\setlength{\parindent}{0in}
+	\setlength{\parskip}{.1in}
+	WholeCellViz is a web-based software program for visually analyzing whole-cell simulations. WholeCellViz enables visual analysis of several all aspects of cell physiology including:
+	\begin{itemize}
+	\item The cell mass, volume, and shape,
+	\item The copy number of every metabolite, RNA, and protein,
+	\item The flux of every metabolic reaction,
+	\item The status of every molecular machine {\textendash} DNA polymerase, RNA polymerase, ribosome, FtsZ ring, and
+	\item The copy number, superhelicity, integrity, and DNA binding status of every chromosome.
+	\end{itemize}
+
+	Please see the tutorial and the about sections at \href{http://wholecellviz.stanford.edu/}{wholecellviz.stanford.edu} for more information about WholeCellViz including how to use WholeCellViz and how it was implemented.
+	
+	This document provides instructions on how to install, develop, and use WholeCellViz. Please contact the authors with any questions; updated contact information is available at \href{http://wholecellviz.stanford.edu/}{wholecellviz.stanford.edu}.
+	
+	WholeCellViz is freely available at \href{http://wholecellviz.stanford.edu/}{wholecellviz.stanford.edu}. The WholeCellViz source code is available open-source at \url{http://simtk.org/home/wholecell}.
+}
+
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Table of contents      %%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\cleardoublepage
+\pagestyle{plain}
+
+\currentpdfbookmark{Table of Contents}{__TOC__}
+\tableofcontents
+
+\cleardoublepage
+\mainmatter
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Installation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Installation}
+\begin{enumerate}
+\item Download the source code from SimTK (\url{http://simtk.org/home/wholecell}) and extract to \path{/path/to/WholeCellViz/}
+\item Edit WholeCellViz configuration (\path{/path/to/WholeCellViz/configuration.php})
+	\begin{enumerate}
+	\item Edit host, database, user, and password for your MySQL database
+	\item Edit location of simulated data (\texttt{simulationsBaseDir})
+	\item Edit location of WholeCellViz (\texttt{WholeCellVizDataPath}, \texttt{WholeCellVizURL}, \texttt{WholeCellVizDataURL})
+	\end{enumerate}
+\item Install Apache, MySQL, PHP, phpMyAdmin (eg. \url{http://www.wampserver.com/})
+\item Setup Apache
+	\begin{enumerate}
+	\item Add alias and/or virtual host
+	\end{enumerate}
+\item Setup MySQL
+	\begin{enumerate}
+	\item Set root password
+		\begin{verbatim}
+UPDATE mysql.user SET Password=PASSWORD('<rootpass>') WHERE User='root';
+FLUSH PRIVILEGES;
+		\end{verbatim}
+	\item Remove test database
+	\item Remove anonymous users
+	\item Create database
+		\begin{verbatim}
+mysql >> create database <database>
+		\end{verbatim}
+	\item Create user and grant permissions
+		\begin{verbatim}
+mysql >> CREATE USER '<user>'@'%' IDENTIFIED BY '<password>';
+mysql >> GRANT ALL ON <database>.* TO '<user>'@'%' WITH GRANT OPTION;
+		\end{verbatim}
+	\item Load tables and data
+		\begin{verbatim}
+>> mysql -h <host> -u <user> --password=<password> <database> < \
+	/path/to/wholecellviz/data/data.sql
+		\end{verbatim}
+	\end{enumerate}
+\item Setup PHP
+	\begin{enumerate}
+	\item Add PHP to system path
+	\item Edit php.ini
+		\begin{verbatim}
+error_reporting = E_ALL & ~E_NOTICE
+display_errors = Off
+		\end{verbatim}
+	\end{enumerate}
+\item Edit phpMyAdmin configuration
+	\begin{verbatim}
+$cfg['Servers'][$i]['auth_type'] = 'cookie';
+	\end{verbatim}
+\item Export simulation data to JSON format
+	\begin{itemize}
+	\item Use the \texttt{runExportData} script from the WholeCell package to export each simulation batch
+		\begin{verbatim}
+/path/to/WholeCell/simulation/runExportData.pl <batch> <numSimulations>
+		\end{verbatim}
+	\item This will create files with the pattern \path{/path/to/WholeCell/simulation/output/runSimulation/<batch>/<sim>/json/<class_name>/<attr_name>.json}
+	\item Note: this currently only exports a subset of the available data. Edit /path/to/WholeCell/simulation/runExportData.m to configure which states are exported.
+	\end{itemize}
+\item Add simulations to \texttt{simulations} table in WholeCellKB database
+	\begin{verbatim}
+>> php indexSimulations.php
+	\end{verbatim}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Developing visualizations
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Developing visualizations}
+
+WholeCellViz was developed primarily in JavaScript using several libraries including jQuery (\url{http://jquery.com/}) and flot (\url{http://www.flotcharts.org/}). Additionally, several server-side web services where implemented in PHP.
+
+There are two steps to create a new visualization. First, add a new JavaScript class to \path{/path/to/wholecellviz/js/WholeCellViz-visualizations.js} which extends the \texttt{Visualization} class defined in \path{/path/to/whole\-cell\-viz/\-js/\-Whole\-Cell\-Viz.js}. Visualizations should implement four methods:
+\begin{itemize}
+\item \texttt{\textit{getData}} {\textendash} This method should fetch data from external sources based on the selected simulation (\texttt{metadata.\-sim\_id}). This method can call the \texttt{getSeriesData} helper method to fetch JSON-formatted data. This method should also set the visualization's \texttt{timeMin} and \texttt{timeMax} properties to inform the time range displayed to the user. This method is called once during the visualization's construction.
+\item \texttt{\textit{calcLayout}} {\textendash} This method should calculate the visualization's layout. This method is called during the visualization's construction and each time it is resized.
+\item \texttt{\textit{drawStaticObjects}} {\textendash} This method should draw parts of the visualization which don't change with time. This method is called during the visualization's construction and each time it is resized.
+\item \texttt{\textit{drawDynamicObjects}} {\textendash} This method should draw parts of the visualization which change over time. The \texttt{getDataPoint} and \texttt{getDataIndex} methods can be used to retrieve data based on the current time. This method is called during the visualization's construction, each time it is resized, and each time the animation time line is advanced. 
+\end{itemize}
+
+Both the \texttt{drawStaticObjects} and \texttt{drawDynamicObjects} methods should use the \texttt{drawObject} method to draw objects to the canvas and to bind tool tips and mouse click handlers to the visualization.
+
+Box~\ref{box:viztemplate} provides a template for constructing new visualizations. \path{/path/to/whole\-cell\-viz/js/Whole\-Cell\-Viz-vis\-ualizations.js} provides several sample visualizations.
+
+\begin{lstlisting}[caption={\textbf{Visualization class template.}},label={box:viztemplate},language={JavaScript}]
+var NewVisualization = Visualization.extend({
+	getData: function(metadata){
+		this.data = this.getSeriesData('getSeriesData.php', {
+			sim_id:metadata.sim_id, 
+			class_name: '<class-name>', 
+			attr_name: '<attr-name>',
+		});
+		this.timeMin = yourFuncToCalcMinTime(this.data);
+		this.timeMax = yourFuncToCalcMaxTime(this.data);
+	},
+	
+	calcLayout: function(){
+	},
+	
+	drawStaticObjects: function(){
+		this.drawObject({
+			'strokeStyle': strokeStyle,
+			'fillStyle': fillStyle,
+			'data': getDataPoint(this.data, t),
+			drawFunc: function(self, ctx, data){
+			},
+			tipFunc: function(self, data){
+			},
+			clickFunc: function(self, data){
+			},
+		});
+	},
+	
+	drawDynamicObjects: function(t){
+		this.drawObject({
+			'strokeStyle': strokeStyle,
+			'fillStyle': fillStyle,
+			'data': getDataPoint(this.data, t),
+			drawFunc: function(self, ctx, data){
+			},
+			tipFunc: function(self, data){
+			},
+			clickFunc: function(self, data){
+			},
+		});
+	},
+});
+\end{lstlisting}
+
+Second, add an entry for the visualization to the \texttt{attributes} table of the WholeCellKB database, using phpMyAdmin for example. Finally, navigate to WholeCellViz and use the configuration window to display your new visualization.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Using WholeCellViz
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Using WholeCellViz}
+
+To use WholCellViz first navigate to \path{http://path/to/your/server/WholeCellViz}. Next, to configure the panels either click the configuration button at the top-right of each panel or access the configuration window from the Edit button in the menu at the top-left of the page. Use the configuration window to select the simulation and data series plotted in each panel. 
+
+See the online tutorial for additional help using WholeCellViz.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% begin appendix
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\appendix
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% License               
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{License}
+Copyright (c) 2012, Stanford University
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE 
+SOFTWARE.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% End Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}

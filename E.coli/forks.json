@@ -1,0 +1,36 @@
+{"nodes": [ 
+
+
+	[{"rpos": 3900000, "protein": null, "name": "OriC_001BA", "lpos": 3900000}, 
+	{"rpos": 800000, "name": "F_001BA", "lpos": 800000}, 
+	{"rpos": 1400000, "name": "F_001A", "lpos": 1400000}, 
+	{"rpos": 1600000, "protein": null, "name": "terC_001", "lpos": 1600000},
+	 {"rpos": 1800000, "name": "F_001B", "lpos": 1800000}, 
+	{"rpos": 2400000, "name": "F_001BB", "lpos": 2400000}], 
+
+	[{"rpos": 3900000, "protein": null, "name": "OriC_001ABA", "lpos": 3900000}, 
+	{"rpos": 100000, "name": "F_001ABA", "lpos": 100000}, 
+	{"rpos": 1200000, "name": "F_001AA", "lpos": 1200000}, 
+	{"rpos": 1400000, "name": "F_001A", "lpos": 1400000}, 
+	{"rpos": 1600000, "protein": null, "name": "terC_001", "lpos": 1600000}, 
+	{"rpos": 1800000, "name": "F_001B", "lpos": 1800000}, 
+	{"rpos": 2000000, "name": "F_001AB", "lpos": 2000000}, 
+	{"rpos": 3100000, "name": "F_001ABB", "lpos": 3100000}], 
+
+	[{"rpos": 3900000, "protein": null, "name": "OriC_001BB", "lpos": 3900000}, 
+	{"rpos": 800000, "name": "F_001BA", "lpos": 800000}, 
+	{"rpos": 1400000, "name": "F_001A", "lpos": 1400000}, 
+	{"rpos": 1600000, "protein": null, "name": "terC_001", "lpos": 1600000}, 
+	{"rpos": 1800000, "name": "F_001B", "lpos": 1800000}, 
+	{"rpos": 2400000, "name": "F_001BB", "lpos": 2400000}], 
+
+	[{"rpos": 3900000, "protein": null, "name": "OriC_001ABB", "lpos": 3900000}, 
+	{"rpos": 100000, "name": "F_001ABA", "lpos": 100000}, 
+	{"rpos": 1200000, "name": "F_001AA", "lpos": 1200000}, 
+	{"rpos": 1400000, "name": "F_001A", "lpos": 1400000}, 
+	{"rpos": 1600000, "protein": null, "name": "terC_001", "lpos": 1600000}, 
+	{"rpos": 1800000, "name": "F_001B", "lpos": 1800000}, 
+	{"rpos": 2000000, "name": "F_001AB", "lpos": 2000000}, 
+	{"rpos": 3100000, "name": "F_001ABB", "lpos": 3100000}]
+], 
+"endPos": 1600000, "number": 1, "startPos": 3900000, "size": 4600000}

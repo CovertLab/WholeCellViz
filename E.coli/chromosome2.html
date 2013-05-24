@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<META HTTP-EQUIV="content-type" CONTENT="text/html; charset=utf-8">
+	<title>WCMVisual - E. coli chromosome </title>
+	
+	<link href='http://fonts.googleapis.com/css?family=PT+Sans' rel='stylesheet' type='text/css' />
+	<script language="javascript" type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+	<script language="javascript" type="text/javascript" src="js/kinetic-v3.10.3.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(init);
+		
+		function init() {
+			var stage = new Kinetic.Stage({
+          		container: "canvas_container",
+         		width: 800,
+         		height: 550
+       		});
+			var ch = new Chromosome(stage);
+			
+			$("#label_toggle").attr('checked','checked')
+			$("#label_toggle").click(function() {
+				ch.label_toggle();
+			});
+		}
+		
+		function Chromosome(stage) {
+			this.stage = stage;
+			this.strand_layers = [];						// array of layers
+			this.labels = [];								// array of nodes
+			
+			this.data = this.get_data();					// returns object from JSON file
+			this.size = this.data["size"];					// size of chromosome
+			this.radius = this.size/20000;					// radius on canvas (normalized to size)
+			this.slope = 0;									// slope by which the center point shifts (determined by position of first OriC)
+			this.x_center = this.stage.getWidth()/2;
+			this.y_center = this.stage.getHeight()/2;
+			
+			this.data = this.count_forks(this.data["nodes"]);	// returns object with additional num_forks property for each strand
+			this.data = this.sort_data(this.data);				// returns array of strand objects, sorted by number of forks			
+			this.nodes = new Object();
+			this.connections = new Object();
+
+			var color = '#'+('00000'+(Math.random()*16777216<<0).toString(16)).substr(-6);
+			this.add_first_path(this.data[0],color);
+
+			if (Object.keys(this.data).length > 1) {
+				for (var i = 1; i < Object.keys(this.data).length; i++) {
+					var color = '#'+('00000'+(Math.random()*16777216<<0).toString(16)).substr(-6);
+					this.add_path(this.data[i],i,color);
+				}
+			}
+			
+			var controls_html = $("#control_panel").html();
+			for (var i = 0; i < this.strand_layers.length; i++) {
+				controls_html += '<br><input type="checkbox" class="checkbox_strand" id="strand' + i + '">Strand ' + (i+1).toString();
+			}
+			$("#control_panel").html(controls_html);
+			
+			var ch = this;
+			$(".checkbox_strand").each(function(i) {
+				$(this).attr('checked','checked');
+				$(this).click(function() {
+					ch.strand_toggle(i);
+				});
+			});
+	
+		}
+		
+		Chromosome.prototype.get_data = function() {
+			var data = new Object();
+			$.ajax({
+				url: "forks.json",
+				dataType: 'json',
+				async: false,
+				success: function(json) {
+					data = json;
+				}
+			});
+			return data;
+		}
+		
+		Chromosome.prototype.count_forks = function(data) {
+			for (var i = 0; i < Object.keys(data).length; i++) {
+				var count = 0;
+				for (var j = 0; j < Object.keys(data[i]).length; j++) {
+					if (data[i][j]["name"].substring(0,2) == 'F_') {
+						count += 1;
+					}
+				}
+				data[i]["num_forks"] = count;
+			}
+			
+			return data;
+		}
+		
+		Chromosome.prototype.sort_data = function(data) {
+			var arr = new Array();
+			for (var i = 0; i < Object.keys(data).length; i++) {
+				arr.push({
+					'key': data[i],
+					'value': data[i]["num_forks"]
+				});
+			}
+			arr.sort(function(a,b) { return b['value'] - a['value'] });
+			
+			for (var i = 0; i < arr.length; i++) {				// removes 'value' from array
+				arr[i] = arr[i]['key'];
+				delete arr[i]['num_forks'];
+			}
+			return arr;
+		}
+		
+		Chromosome.prototype.add_first_path = function(path_data,color) {
+			var ch = this;
+			var layer = new Kinetic.Layer();
+			var circle = new Kinetic.Shape({
+                drawFunc: function(){
+                    var context = this.getContext();
+                    context.save();
+					context.lineWidth = 3;
+					context.strokeStyle = color;
+					context.beginPath();
+					context.arc(ch.x_center,ch.y_center,ch.radius,0,2*Math.PI,false);	// draw outermost circle
+                	context.stroke();
+                }
+            });
+			layer.add(circle);
+			this.strand_layers.push(layer);
+			
+			for (var i = 0; i < Object.keys(path_data).length; i++) {
+				// label node
+				var name = path_data[i]["name"];
+				var pos = path_data[i]["rpos"];
+				var theta = pos/this.size * 2 * Math.PI;
+				var x = this.x_center + this.radius * Math.cos(theta);
+				var y = this.y_center + this.radius * Math.sin(theta);
+				this.label_node(x,y,name,0);
+				
+				// store connection to next node
+				var node_next;
+				if (i == Object.keys(path_data).length-1) {
+					node_next = path_data[0];
+				} else {
+					node_next = path_data[i+1];
+				}
+				var name2 = node_next["name"];
+				var pos2 = node_next["rpos"];
+				var theta2 = pos2/this.size * 2 * Math.PI;
+				var x2 = this.x_center + this.radius * Math.cos(theta);
+				var y2 = this.y_center + this.radius * Math.sin(theta);
+				
+				this.nodes[name] = {x: x, y: y};
+				this.connections[name + ',' + node_next["name"]] = {
+					x1: x, y1: y, x2: x2, y2: y2,
+					x_center: this.x_center, y_center: this.y_center, 
+					theta1: theta, theta2: theta2, radius: this.radius
+				};
+				
+				if (name.substring(0,4) == 'OriC') {
+					this.oric_x = x;
+					this.oric_y = y;
+					this.oric_slope = (y-this.y_center)/(x-this.x_center);
+				}
+			}
+		
+			this.stage.add(layer);
+		}
+		
+		Chromosome.prototype.add_path = function(path_data,path_index,color) {
+			var layer = new Kinetic.Layer();
+			this.strand_layers.push(layer);
+			var ch = this;
+			
+			for (var i = 0; i < Object.keys(path_data).length; i++) {
+			( function() {
+			
+				var node1 = path_data[i];
+				var node2;
+				if (i == Object.keys(path_data).length-1) {
+					node2 = path_data[0];
+				} else {
+					node2 = path_data[i+1];
+				}
+				var name1 = node1["name"];
+				var name2 = node2["name"];
+				
+				// connection exists between nodes
+				if (ch.connections[name1 + ',' + name2]) {
+					var connection = ch.connections[name1 + ',' + name2];
+
+					var arc = new Kinetic.Shape({
+						drawFunc: function() {
+							var context = this.getContext();
+							context.strokeStyle = color;
+							context.lineWidth = 3;
+							context.beginPath();
+							context.moveTo(connection["x1"],connection["y1"]);
+							context.arc(connection["x_center"],connection["y_center"],connection["radius"],connection["theta1"],connection["theta2"],false);
+							context.stroke();
+						}
+					});
+					layer.add(arc);
+					
+				// connection does not exist
+				} else {
+					var shift_factor = 15;
+					var x_center = ch.x_center - path_index * shift_factor;
+					var y_center = ch.y_center - path_index * shift_factor * ch.oric_slope;
+	
+					// both nodes already exist
+					if (ch.nodes[name1] && ch.nodes[name2]) {
+						var x1 = ch.nodes[name1]["x"];
+						var y1 = ch.nodes[name1]["y"];
+						var x2 = ch.nodes[name2]["x"];
+						var y2 = ch.nodes[name2]["y"];
+						var xmp = (x1+x2)/2;
+						var ymp = (y1+y2)/2;
+						var mp_slope = -(x2-x1)/(y2-y1);
+						var center = get_poi(xmp,ymp,mp_slope,ch.oric_x,ch.oric_y,ch.oric_slope);
+						var r = Math.sqrt(Math.pow(x1-center[0],2) + Math.pow(y1-center[1],2));
+						var theta1 = Math.atan2(y1-center[1],x1-center[0]);
+						var theta2 = Math.atan2(y2-center[1],x2-center[0]);
+						
+						var arc = new Kinetic.Shape({
+							drawFunc: function() {
+								var context = this.getContext();
+								context.strokeStyle = color;
+								context.lineWidth = 3;
+								context.beginPath();
+								context.arc(center[0],center[1],r,theta1,theta2,false);
+								context.stroke();
+							}
+						});
+						layer.add(arc);
+						
+						// add connection
+						ch.connections[name1 + ',' + name2] = {
+							x1: x1, y1: y1, x2: x2, y2: y2,
+							x_center: center[0], y_center: center[1], 
+							theta1: theta1, theta2: theta2, radius: r
+						};
+					}
+					
+					// node 2 is new (never an OriC)
+					else if (ch.nodes[name1]) {
+						var x1 = ch.nodes[name1]["x"];
+						var y1 = ch.nodes[name1]["y"];
+						var r = Math.sqrt(Math.pow(x1-x_center,2) + Math.pow(y1-y_center,2));
+						var theta1 = Math.atan2(y1-y_center,x1-x_center);
+						
+						var theta2;
+						if (name2.substring(0,4) == 'OriC') {
+							theta2 = Math.atan2(ch.oric_y-y_center,ch.oric_x-x_center);
+						} else {
+							theta2 = theta1 + Math.PI/3;
+						}
+						
+						var arc = new Kinetic.Shape({
+							drawFunc: function() {
+								var context = this.getContext();
+								context.strokeStyle = color;
+								context.lineWidth = 3;
+								context.beginPath();
+								context.moveTo(x1,y1);
+								context.arc(x_center,y_center,r,theta1,theta2,false);
+								context.stroke();
+							}
+						});
+						layer.add(arc);
+						
+						// label new node
+						var x2 = x_center + r * Math.cos(2*Math.PI-theta2);
+						var y2 = y_center - r * Math.sin(2*Math.PI-theta2);
+						ch.label_node(x2,y2,name2,path_index);
+						
+						// add node & connection
+						ch.nodes[name2] = {x: x2, y: y2};
+						ch.connections[name1 + ',' + name2] = {
+							x1: x1, y1: y1, x2: x2, y2: y2,
+							x_center: x_center, y_center: y_center, 
+							theta1: theta1, theta2: theta2, radius: r
+						};
+					}
+					
+					// node 1 is new (always an OriC)
+					else if (ch.nodes[name2]) {
+						var x1 = ch.oric_x - path_index * shift_factor;
+						var y1 = ch.oric_y - path_index * shift_factor * ch.oric_slope;
+						var x2 = ch.nodes[name2]["x"];
+						var y2 = ch.nodes[name2]["y"];
+						var xmp = (x1+x2)/2;
+						var ymp = (y1+y2)/2;
+						var mp_slope = -(x2-x1)/(y2-y1);
+						var center = get_poi(xmp,ymp,mp_slope,ch.oric_x,ch.oric_y,ch.oric_slope);
+						var r = Math.sqrt(Math.pow(x1-center[0],2) + Math.pow(y1-center[1],2));
+						var theta1 = Math.atan2(y1-center[1],x1-center[0]);
+						var theta2 = Math.atan2(y2-center[1],x2-center[0]);
+						
+						var arc = new Kinetic.Shape({
+							drawFunc: function() {
+								var context = this.getContext();
+								context.strokeStyle = color;
+								context.lineWidth = 3;
+								context.beginPath();
+								context.arc(center[0],center[1],r,theta1,theta2,false);
+								context.strokeStyle = color;
+								context.stroke();
+							}
+						});
+						layer.add(arc);
+						
+						ch.label_node(x1,y1,name1,path_index);
+						ch.nodes[name1] = {x: x1, y: y1};
+						
+						// add connection
+						ch.connections[name1 + ',' + name2] = {
+							x1: x1, y1: y1, x2: x2, y2: y2,
+							x_center: center[0], y_center: center[1], 
+							theta1: theta1, theta2: theta2, radius: r
+						};
+					}
+					
+					// both nodes are new (only when an OriC is being added)
+					else {
+						var x1 = ch.oric_x - path_index * shift_factor;
+						var y1 = ch.oric_y - path_index * shift_factor * ch.oric_slope;
+						var r = Math.sqrt(Math.pow(x1-x_center,2) + Math.pow(y1-y_center,2));
+						var theta1 = Math.atan2(y1-y_center,x1-x_center);
+						var theta2 = theta1 + Math.PI/3;
+						
+						var arc = new Kinetic.Shape({
+							drawFunc: function() {
+								var context = this.getContext();
+								context.strokeStyle = color;
+								context.lineWidth = 3;
+								context.beginPath();
+								context.moveTo(x1,y1);
+								context.arc(x_center,y_center,r,theta1,theta2,false);
+								context.stroke();
+							}
+						});
+						layer.add(arc);
+						
+						// label new nodes
+						var x2 = x_center + r * Math.cos(2*Math.PI-theta2);
+						var y2 = y_center - r * Math.sin(2*Math.PI-theta2);
+						ch.label_node(x1,y1,name1,path_index);
+						ch.label_node(x2,y2,name2,path_index);
+						
+						// add node & connection
+						ch.nodes[name1] = {x: x1, y: y1};
+						ch.nodes[name2] = {x: x2, y: y2};
+						ch.connections[name1 + ',' + name2] = {
+							x1: x1, y1: y1, x2: x2, y2: y2,
+							x_center: x_center, y_center: y_center, 
+							theta1: theta1, theta2: theta2, radius: r
+						};
+					}
+				}
+			}());
+			}
+			
+			this.stage.add(layer);
+		}
+		
+		Chromosome.prototype.label_node = function(x,y,name,strand_ind) {
+			var ch = this;
+		
+			var label = new Kinetic.Shape({
+				drawFunc: function() {
+					var context = this.getContext();
+					context.font = "bold 8pt Calibri";
+					context.fillStyle = "white";
+					if (x > ch.x_center && y < ch.y_center) {			// top right quadrant
+						context.fillText(name,x+5,y-5);
+					} else if (x > ch.x_center && y > ch.y_center) {	// bottom right quadrant
+						context.fillText(name,x+5,y+10);
+					} else if (x < ch.x_center && y < ch.y_center) {	// top left quadrant
+						context.fillText(name,x-context.measureText(name).width-5,y-5);
+					} else {												// bottom left quadrant
+						context.fillText(name,x-context.measureText(name).width-5,y+10);
+					}
+					context.stroke();
+			  }
+			});
+            this.strand_layers[strand_ind].add(label);
+            this.labels.push(label);
+		
+			var point = new Kinetic.Shape({
+				drawFunc: function(){
+                    var context = this.getContext();
+					context.save();
+					context.beginPath();							
+					context.arc(x, y, 3, 0, 2*Math.PI, false);			// draw points as circles with r = 2
+					context.fillStyle = "white";
+					context.fill();
+					context.strokeStyle = "white";
+					context.stroke();
+                }
+            });
+
+            this.strand_layers[strand_ind].add(point);
+		}
+		
+		Chromosome.prototype.label_toggle = function() {
+			var checkbox = $("#label_toggle");
+			
+			if (checkbox.is(':checked')) {								// labels on
+				for (var i = 0; i < this.labels.length; i++) {
+					this.labels[i].show();
+				}
+			} else {													// labels off
+				for (var i = 0; i < this.labels.length; i++) {
+					this.labels[i].hide();
+				}
+			}
+			
+			for (var i = 0; i < this.strand_layers.length; i++) {
+				this.strand_layers[i].draw();
+			}
+		}
+		
+		Chromosome.prototype.strand_toggle = function(strand_ind) {
+			var checkbox = $("#strand" + strand_ind);
+			var nodes = this.strand_layers[strand_ind].getChildren();
+			
+			if (checkbox.is(':checked')) {								// strand on
+				for (var key in nodes) {
+					nodes[key].show();
+				}
+			} else {													// strand off
+				for (var key in nodes) {
+					nodes[key].hide();
+				}
+			}
+			
+			this.strand_layers[strand_ind].draw();
+		}
+		
+		function get_poi(x1,y1,slope1,x2,y2,slope2) {
+			// x1,y1,slope1 define line 1
+			// x2,y2,slope2 define line 2
+			// from point-slope form: y-y1 = m(x-x1)
+			// to standard form: -mx + y = y1 - mx1
+			var ans = new Array(2);
+
+			var a1 = -slope1;
+			var b1 = 1;
+			var c1 = y1 - slope1 * x1;
+			var a2 = -slope2;
+			var b2 = 1;
+			var c2 = y2 - slope2*x2;
+			
+			ans[0]=get_deter(c1,b1,c2,b2)/get_deter(a1,b1,a2,b2);
+			ans[1]=get_deter(a1,c1,a2,c2)/get_deter(a1,b1,a2,b2);
+
+			return ans;
+		}
+		
+		function get_deter(a,b,c,d) {
+			return (a*d)-(c*b);
+		}
+		
+		
+	</script>
+	
+	<style type="text/css">
+		body {
+			background: #333;
+			font-family: 'PT Sans';
+		}
+		#container {
+			width: 1200px;
+		}
+		#canvas {
+			background: #FFF;
+			margin: 20px;
+		}
+		#control_panel {
+			float: left;
+			width: 300px;
+			margin: 50px 20px;
+			background: #CCC;
+			padding: 10px;
+			border-radius: 5px;
+			box-shadow: 0 10px 10px rgba(0,0,0,.2);
+		}
+		.title {
+			font-size: 150%;
+		}
+	</style>
+	
+</head>
+
+<body>
+<div id="container">
+	<div id="canvas_container" style="float: left"></div>
+	<div id="control_panel">
+	<span class="title">Controls</span>
+	<br>
+	<br><b>Labels</b>
+	<br><input type="checkbox" id="label_toggle">Labels on
+	<br>
+	<br><b>Strands</b>
+	</div>
+	</canvas>
+</div>
+</body>
+
+</html>

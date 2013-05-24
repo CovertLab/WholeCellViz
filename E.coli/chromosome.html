@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<META HTTP-EQUIV="content-type" CONTENT="text/html; charset=utf-8">
+	<title>WCMVisual - E. coli chromosome </title>
+	
+	<script language="javascript" type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(init);
+		
+		function init() {
+			var context = $("#canvas")[0].getContext('2d');
+			var ch = new Chromosome(context);
+		}
+		
+		function Chromosome(context) {
+			this.context = context;
+			this.data = this.get_data();
+			
+			this.size = this.data["size"];				// size of chromosome
+			this.radius = this.size/20000;				// radius on canvas (normalized to size)
+			this.x_center = $("#canvas").width()/2;
+			this.y_center = $("#canvas").height()/2;			
+			this.nodes = new Object();
+			
+			//for (var i = 1; i < 2; i++) {
+			for (var i = 0; i < Object.keys(this.data["nodes"]).length; i++) {
+				var color = '#'+('00000'+(Math.random()*16777216<<0).toString(16)).substr(-6);
+				this.add_path(this.context,this.data["nodes"][i],this.nodes,i,color);
+			}
+		}
+		
+		Chromosome.prototype.get_data = function() {
+			var data = new Object();
+			$.ajax({
+				url: "forks.json",
+				dataType: 'json',
+				async: false,
+				success: function(json) {
+					data = json;
+				}
+			});
+			return data;
+		}
+		
+		Chromosome.prototype.add_path = function(context,path_data,nodes,path_index,color) {
+			// get array of node objects (x,y,name,pos) on path
+			var path = [];
+			for (var i = 0; i < Object.keys(path_data).length; i++) {
+				name = path_data[i]["name"];
+				pos = path_data[i]["rpos"];
+			
+				// if node already exists, add push node coordinates to pts
+				if (nodes[name]) {
+					path.push({x: nodes[name]["x"], y: nodes[name]["y"], name: name, pos: pos});
+				}
+				
+				// else, calculate node coordinates and push to pts
+				else {
+					var theta = pos/this.size * 2 * Math.PI;
+					var x = this.x_center-path_index*20 + this.radius * Math.sin(theta);
+					var y = this.y_center+path_index*20 + this.radius * Math.cos(theta);
+					path.push({x: x, y: y, name: name, pos: pos});
+					nodes[name] = {x: x, y: y};		// add to existing nodes
+					
+					// label node
+					context.save();
+					context.beginPath();					// draw points as circles with r = 2
+					context.arc(x, y, 2, 0, 2*Math.PI, false);
+					context.lineWidth = 5;
+					context.fillStyle = "red";
+					context.fill();
+					context.strokeStyle = "red";
+					context.stroke();
+					context.font = "bold 8pt Arial";
+        			context.fillStyle = "black";
+        			
+        			if (x > this.x_center && y < this.y_center) {			// top right quadrant
+						context.fillText(name,x+5,y-10);
+					} else if (x > this.x_center && y > this.y_center) {	// bottom right quadrant
+						context.fillText(name,x+5,y+15);
+					} else if (x < this.x_center && y < this.y_center) {	// top left quadrant
+						context.fillText(name,x-context.measureText(name).width,y-10);
+					} else {												// bottom left quadrant
+						context.fillText(name,x-context.measureText(name).width,y+15);
+					}
+				}
+			}
+				
+			// draw bezier curve connecting points on path
+			context.beginPath();
+			context.lineWidth = 3;
+			context.strokeStyle = color;
+			for (var i = 0; i < path.length; i++) {
+				var t = 0.5;						// tension
+				context.moveTo(path[i].x,path[i].y);
+				
+				if (i == 0) {
+					var control_points = get_control_points(path[path.length-1].x,path[path.length-1].y,path[i].x,path[i].y,path[i+1].x,path[i+1].y,t);
+					var control_points2 = get_control_points(path[i].x,path[i].y,path[i+1].x,path[i+1].y,path[i+2].x,path[i+2].y,t);
+					context.bezierCurveTo(control_points[2],control_points[3],control_points2[0],control_points2[1],path[i+1].x,path[i+1].y);
+				} else if (i == path.length-1) {
+					var control_points = get_control_points(path[i-1].x,path[i-1].y,path[i].x,path[i].y,path[0].x,path[0].y,t);
+					var control_points2 = get_control_points(path[i].x,path[i].y,path[0].x,path[0].y,path[1].x,path[1].y,t);
+					context.bezierCurveTo(control_points[2],control_points[3],control_points2[0],control_points2[1],path[0].x,path[0].y);
+				} else if (i == path.length-2) {
+					var control_points = get_control_points(path[i-1].x,path[i-1].y,path[i].x,path[i].y,path[i+1].x,path[i+1].y,t);
+					var control_points2 = get_control_points(path[i].x,path[i].y,path[i+1].x,path[i+1].y,path[0].x,path[0].y,t);
+					context.bezierCurveTo(control_points[2],control_points[3],control_points2[0],control_points2[1],path[i+1].x,path[i+1].y);
+				} else {
+					var control_points = get_control_points(path[i-1].x,path[i-1].y,path[i].x,path[i].y,path[i+1].x,path[i+1].y,t);
+					var control_points2 = get_control_points(path[i].x,path[i].y,path[i+1].x,path[i+1].y,path[i+2].x,path[i+2].y,t);
+					context.bezierCurveTo(control_points[2],control_points[3],control_points2[0],control_points2[1],path[i+1].x,path[i+1].y);
+				}
+				context.stroke();
+			}
+		}
+		
+		// source: http://scaledinnovation.com/analytics/splines/aboutSplines.html
+		function get_control_points(x0,y0,x1,y1,x2,y2,t){
+			//  x0,y0,x1,y1 are the coordinates of the end (knot) pts of this segment
+			//  x2,y2 is the next knot -- not connected here but needed to calculate p2
+			//  p1 is the control point calculated here, from x1 back toward x0.
+			//  p2 is the next control point, calculated here and returned to become the 
+			//  next segment's p1.
+			//  t is the 'tension' which controls how far the control points spread.
+			
+			//  Scaling factors: distances from this knot to the previous and following knots.
+			var d01=Math.sqrt(Math.pow(x1-x0,2)+Math.pow(y1-y0,2));
+			var d12=Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2));
+			var fa=t*d01/(d01+d12);
+			var fb=t-fa;
+			var p1x=x1+fa*(x0-x2);
+			var p1y=y1+fa*(y0-y2);
+			var p2x=x1-fb*(x0-x2);
+			var p2y=y1-fb*(y0-y2);  
+			return [p1x,p1y,p2x,p2y]
+		}
+		
+	</script>
+	
+	<style type="text/css">
+		body {
+			background: #000;
+		}
+		#canvas {
+			background: #FFF;
+			margin: 20px;
+		}
+	</style>
+	
+</head>
+
+<body>
+<canvas id="canvas" width="800" height="600">
+</canvas>
+</body>
+
+</html>

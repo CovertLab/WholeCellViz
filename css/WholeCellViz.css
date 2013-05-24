@@ -1,0 +1,675 @@
+/************************
+ * WholeCellViz.css
+ *   Defines styles for WholeCellViz application. This builds on styles from 
+ *   jquery-ui and several jquery plugins.
+ *
+ * Author: Ruby Lee
+ * Author: Jonathan Karr, jkarr@stanford.edu
+ * Affiliation: Covert Lab, Department of Bioengineering, Stanford University
+ *************************/
+
+body {
+	font-family: 'PT Sans', sans-serif;
+	padding:0px;
+	margin:0px;
+	height:100%;
+	overflow: hidden;
+	width:100%;
+	font-size:12px;
+}
+
+a {
+	text-decoration:none;
+	cursor:pointer;
+	cursor:hand;
+}
+
+input.spinner{
+	width:30px;
+	height:12px;	
+}
+
+ul{
+	margin-top:0px;
+	margin-left:0px;
+	padding-left:14px;
+}
+
+.panel .plotContainer .tickLabels .yAxis .tickLabel{
+	font-size: 8px;
+}
+.panel .plotContainer .axisLabels{
+	font-size: 12px;
+}
+
+
+/* header */
+#header {
+	z-index: 2;
+	position:absolute;
+	left:0px;
+	top:0px;
+	right:0px;
+	height: 65px;
+	overflow: hidden;
+	margin: 0px 0px 0px 0px;	
+	border-top:none;
+	border-right:none;
+	border-left:none;
+	box-shadow: 0px 100px 100px rgba(0,0,0, 0); /* for some reason this is needed to get drop down menu to work in chrome */
+}
+
+#header .title {
+	position:relative;
+	font-size: 16px;
+	color: #3d80b3;
+	top:0px;
+	left:70px;
+	font-style:italic;
+}
+
+#header  .banner{
+	position:absolute;
+	top:2px;
+	left:0px;
+}
+
+#header .menu{	
+	position:absolute;	
+	height:18px;
+	list-style:none;
+	margin:0px;
+	padding:0px;
+	font-weight: normal;
+}
+#header .menu li{
+	float:left;
+	display:inline;
+	margin:0px;
+	margin-left:1px;
+	padding-top:2px;
+	padding-bottom:6px;
+}
+#header .menu li.spacer{	
+	width:1px;
+	height:10px;
+	background: #222;
+}
+#header .menu li:nth-child(odd), #header .menu li ul li{
+	padding-left:4px;
+	padding-right:4px;
+}
+#header .menu li:first-child{
+	border-left:none;
+}
+#header .menu a{
+	color: #3d80b3;
+	margin:0px;
+	padding:0px;
+}
+
+#header .menu li ul{
+	background:#cccccc;
+	list-style:none;
+	position:fixed;
+	top:65px;	
+	visibility:hidden;
+	border-bottom:1px solid #aaaaaa;
+	border-left:1px solid #aaaaaa;
+	border-right:1px solid #aaaaaa;
+	width:auto;	
+	padding:0px;
+	margin:0px;
+	margin-left:-5px;	
+}
+#header .menu li ul li{
+	padding-bottom:2px;
+	float:none;
+	padding-top:1px;	
+	display:list-item;
+	text-align:left;
+}
+#header .menu li ul li a{
+	white-space:nowrap;
+}
+#header .menu li:hover{
+	background-color:#fff;
+}
+#header .menu li:hover a{
+	color:#3d80b3;
+}
+#header .menu li:hover ul{
+	visibility:visible;
+}
+#header .menu li:hover ul li:hover{
+	background:#fff;
+}
+#header .menu li:hover ul li a{
+	color:#3d80b3;
+}
+#header .menu li:hover ul li:hover a{
+	color:#3d80b3;
+}
+#header .menu_left{
+	top:47px;
+	left:66px;
+	text-align:left;
+}
+#header .menu_right1{
+	top:29px;
+	right:5px;
+	text-align:right;
+}
+#header .menu_right2{
+	top:47px;
+	right:5px;
+	text-align:right;
+}
+#header .menu_right_title{
+	position:absolute;
+	border-bottom:1px solid #222;
+	top:13px;
+	right:5px;
+	text-align:center;
+	color:#3d80b3;
+	font-weight:bold;
+}
+
+/* windows */
+.ui-dialog-content div h1{
+	font-size:14px;
+	margin-bottom:2px;
+	margin-top:18px;
+	padding-bottom:0px;
+}
+.ui-dialog-content div:first-child h1{
+	margin-top:0px;
+}
+.ui-dialog-content div p{
+	margin-top:4px;
+	margin-bottom:4px;
+	padding:0px;
+}
+.ui-dialog-content a{
+	color:#3d80b3;
+}
+.ui-dialog-content ul li{
+	margin-top:6px;
+	margin-left:4px;
+}
+.ui-dialog-content ul li:first-child{
+	margin-top:0px;
+}
+.ui-dialog-content ul li h1{
+	font-size:14px;
+	margin:0px;
+	padding:0px;
+}
+.ui-accordion-header a { 
+	color: #222222; 
+}
+
+/* config panel */
+#config{
+	height:316px;
+	margin:0px;
+	padding:0px;
+	overflow:visible;
+}
+#config .ui-accordion-content{
+	margin:0px;
+	padding:10px;
+}
+#config .ui-accordion-content .section{
+	margin-top:10px;
+}
+#config .ui-accordion-content .section:first-child{
+	margin-top:0px;
+}
+#config .ui-accordion-content .section h4{
+	margin:0px;
+	margin-bottom:4px;
+}
+#config .ui-accordion-content .section select{
+	width:180px;
+}
+#config .ui-accordion-content .section input{
+	width:176px;
+}
+#config .ui-accordion-content .section .panelSelector{
+	width:75px;
+}
+#config .ui-accordion-content .section .addSeriesSelector{
+	height:106px;
+	border: 1px solid #aaa;
+}
+
+#config .ui-accordion-content .section table tr th{
+	text-align:right;
+	vertical-align:top;
+	white-space:nowrap;
+	font-weight:normal;
+	padding:0px;
+	padding-right:2px;
+	margin:0px;
+}
+#config .ui-accordion-content .section table tr td{	
+	vertical-align:top;
+	padding:0px;
+	margin:0px;
+}
+#config .ui-accordion-content .section table tr td input, #config .ui-accordion-content .section table tr td select{
+	margin:0px;
+	padding:0px;
+}
+
+#config .addSeries, #config .removeSeries{
+	width: 19px;
+	height: 19px;
+	border: none;
+	padding: 0;	
+}
+#config .addSeries span, #config .removeSeries span {
+	top:1px;
+	left:1px;
+	display: block;
+	margin: 0px;
+	padding: 0px;
+	width: 19px;
+}
+
+#config .frameRateInput{
+	background:#ccc;
+	border:1px solid #aaa;
+	text-align:right;
+}
+
+
+/* panels */
+#container {
+	z-index:1;
+	position:absolute;
+	top:65px;
+	left:0px;
+	right:0px;
+	bottom:34px;
+	padding:0px;
+	margin:0px;
+}
+
+.panel {	
+	padding:0px;
+	box-shadow: 0px 5px 5px rgba(0, 0, 0, .5);
+}
+
+.panel .ui-dialog-titlebar{
+	text-align:center;
+	border:none;
+	border-bottom-left-radius:0px;
+	border-bottom-right-radius:0px;
+	height:26px;
+	padding:0px;
+	padding-top:5px;
+	padding-bottom:2px;
+	margin:0px;
+}
+.panel .ui-dialog-title{
+	text-align:center;
+	width:100%;
+	white-space:nowrap;
+	padding:0px;
+	margin:0px;
+	position:relative;
+	top:-14px;
+}
+.panel .ui-dialog-title .dataTitle{
+	position:relative;
+	top:-6px;
+	width:100%;
+	text-align: center;
+}
+.panel .ui-dialog-title .simTitle{
+	position:relative;
+	top:-7px;
+	width: 100%;
+	text-align: center;
+	font-size: 10px;
+	white-space:nowrap;
+	height:2px;
+	overflow:visible;
+}
+
+.panel .ui-dialog-titlebar-close {
+	display: none;
+}
+.panel  .ui-dialog-titlebar .buttons{	
+	position: absolute; 
+	right:4px;
+	top: 4px;
+}
+.panel  .ui-dialog-titlebar .buttons a{
+	float:right;
+	padding: 1px;
+	height: 18px;
+	width: 19px;
+}
+.panel  .ui-dialog-titlebar .buttons a span {
+	display: block;
+	margin: 1px;	
+}
+.panel  .ui-dialog-titlebar .buttons a:hover{
+	padding: 0;
+}
+
+.panel .ui-dialog-content{
+	overflow:visible;
+}
+
+.panel .plotContainer{
+	position:absolute;	
+	overflow:visible;
+}
+.panel .plotContainer .loading{
+	position:absolute;
+	width:100%;
+	top:50%;
+	margin-top: -20px;
+	height:20px;
+	text-align:center;
+	font-size: 200%;
+	font-style:italic;
+	color: #cccccc;
+}
+.panel .plotContainer canvas.viz{
+	position:absolute;
+	top: -3px;
+	left: 5px;
+}
+
+.axisLabels{
+	font-size:14px;
+}
+
+.legendColorBox div div{
+	cursor:pointer;
+	cursor:hand;
+}
+.legendColorBox div div:hover{
+	opacity:0;
+	filter:alpha(opacity=0);
+}
+
+/* timeline */
+#timeline {
+	position: absolute;
+	left: 0px;
+	bottom: 0px;
+	width: 100%;
+	height: 24px;
+	z-index:2;
+	border-bottom:none;
+	border-right:none;
+	border-left:none;
+}
+
+#timeline .playPauseButton, #timeline .repeatButton, #timeline .speedButton, #timeline .showLabelsButton, #timeline .configButton{	
+	cursor:default;
+	padding: 1px;
+	height: 18px;
+	width: 19px;
+	position:absolute;
+	top:2px;
+}
+#timeline .playPauseButton{	
+	left:10px;
+}
+#timeline .repeatButton{	
+	left:32px;
+}
+#timeline .speedButton{	
+	left:54px;
+}
+#timeline .showLabelsButton{	
+	right:32px;
+}
+#timeline .configButton{	
+	right:10px;
+}
+#timeline .playPauseButton span, #timeline .repeatButton span, #timeline .speedButton span, #timeline .showLabelsButton span, #timeline .configButton span{
+	display: block; 
+	margin: 1px;
+}
+#timeline .speedContainer{
+	position:absolute;
+	left:61px;
+	bottom:24px;
+}
+#timeline .speedSelector{
+	height:180px;
+	width:6px;
+	background: #ffffff;
+	border: 1px solid #aaaaaa;
+}
+#timeline .speedSelector div{
+	border: 1px solid #aaaaaa;
+	background: #ccc;
+	width:14px;
+	height:8px;
+}
+#timeline .speedText{
+	position:absolute;
+	bottom:182px;
+	left:-49px;
+	width:100px;
+	text-align:center;
+	font-size:10px;
+}
+
+#timeline .progressBarContainer{	
+	position:absolute;
+	top:7px;
+	height:18px;
+	left:76px;
+	right:104px;
+	margin:0px;
+	padding:0px;
+}
+#timeline .progressBarContainer .progressBar{
+	position:relative;
+	top:3px;	
+	height:3px;
+	width:100%;
+}
+#timeline .progressBarContainer .progressBar .ui-progressbar-value{
+	background: #aaaaaa;
+}
+
+#timeline .progressBarContainer .progressBarDragger{	
+	display:none;
+	position:absolute;	
+	top:0px;
+	left:0px;
+	width:2px;
+	height:18px;
+	background:#aaaaaa;
+}
+
+#timeline .timeText{
+	position:absolute;
+	top:6px;
+	height:10px;
+	right:58px;
+	width:42px;
+	text-align:right;
+	font-size:10px;
+	overflow:hidden;
+}
+
+#timeline.enabled .playPauseButton, #timeline.enabled .progressBarContainer{
+	cursor:pointer;
+	cursor:hand;
+}
+#timeline.enabled .progressBarContainer:hover .progressBarDragger{
+	display:block;
+}
+
+/* ajax status */
+.ajaxStatus .ui-dialog-titlebar-close{
+	visibility: hidden;
+}
+.ajaxStatusAlert .ui-dialog-titlebar{
+	background: #FF7F7F url(images/ui-bg_highlight-soft_75_cccccc_1x100.png) 50% 50% repeat-x;
+}
+.ajaxStatusAlert .ui-dialog-titlebar-close{
+	visibility: visible;
+}
+
+
+/* tooltip */
+#tooltip {	
+	position:absolute;
+    padding: 5px 5px;
+    font-size: 10px;
+	font-weight:normal;
+	width:auto;
+	height:auto;
+	max-width:150px;
+	vertical-align:middle;
+	z-index:100;
+}
+#tooltip h1{
+	padding:0px;
+	margin:0px;
+	margin-bottom:2px;
+	font-size:12px;
+}
+
+/* tutorial */
+#tutorial .arrows{
+	z-index:2;
+}
+#tutorial .instructions li{
+	list-style-type:none;		
+}
+#tutorial .instructions li:hover{
+	list-style-image:url(../images/tutorial/square.png);
+}
+#tutorial .instructions li:hover h1{
+	color:#3d80b3;
+}
+
+/* index page */
+#container.index {
+	bottom:0px;
+	left:195px;	
+	padding:20px 20px 0px 20px;
+	overflow-x:visible;	
+	overflow-y:scroll;	
+}
+#container.index div{
+	max-width:780px;
+	padding-bottom:20px;
+}
+#container.index h1{
+	color: #3d80b3;
+	width: 100%;
+	border-bottom:2px solid #3d80b3;
+	margin-bottom:0px;
+	margin-top:30px;	
+}
+#container.index h1:first-child{
+	margin-top:0px;
+}
+#container.index h2{
+	margin-bottom:-12px;
+	padding-bottom:0px;
+}
+
+#container.index p, #container.index li, #container.index td{
+	font-size:14px;
+}
+#container.index ul{
+	margin-top:-14px;
+	padding-top:0px;
+	margin-left:6px;
+}
+#container.index ol{
+	margin-top:-14px;
+	padding-top:0px;
+	margin-left:-20px;
+}
+#container.index ol ol{
+	margin-top:0px;
+}
+#container.index a{ 
+	color: #3d80b3; 
+}
+
+#container.index #structuredViz{
+	margin-top:0px;
+}
+#container.index #structuredViz tr td{
+	padding-top:20px;
+	width:380px;
+	vertical-align:top;
+}
+#container.index #structuredViz tr td:first-child{
+	padding-right:20px;
+}
+#container.index #structuredViz tr td:last-child{
+	padding-left:20px;
+}
+#container.index #structuredViz tr td img{
+	width:360px;
+}
+#container.index #structuredViz tr td div:nth-child(2){
+	font-weight:bold;
+}
+#container.index #structuredViz tr td div:last-child p{
+	margin-top:0px;
+	margin-bottom:4px;
+}
+#container.index .ui-icon{
+	display:inline-block;
+	position:relative;
+	top:2px;
+	margin:0px;
+	padding:0px;
+}
+
+#nav{
+	z-index:3;
+	position:absolute;
+	left:20px;
+	top:90px;
+	width:145px;
+	padding:8px 10px 0px 10px;
+	border: 1px solid #aaaaaa;
+	border-radius:8px;
+	background: #cfcfcf;
+}
+#nav a{
+	color: #222222;
+}
+#nav a:hover{
+	text-decoration:underline;
+}
+#nav h1{
+	font-size:12px;
+	text-align:center;
+	margin-top:0px;
+	margin-bottom:8px;
+	padding-bottom:2px;
+	border-bottom:1px solid #222222;
+}
+#nav ul{
+	margin-left:6px;
+	margin-right:0px;	
+}
+#nav ul li a{
+	position:relative;
+	left:-6px;
+}
+#nav ul li ul{
+	margin-left:0px;
+}
