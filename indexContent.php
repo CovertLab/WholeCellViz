@@ -22,6 +22,7 @@
 <li>A <a href="#config">layout editor</a> which enables users to configure a grid of structured visualizations and time series plots, enabling users to simultaneously compare multiple model predictions side-by-side.</li>
 <li>A layout history. Simply use your browser's backward/forward buttons to undo/redo layout changes.</li>
 <li>A single animation <a href="#timeline">timeline</a> with play, pause, seek, speed, and repeat controls.</li>
+<li><a href="#importingData">Data import</a> in JSON format</li>
 <li><a href="#exportingGrapics">Graphical export</a> in SVG format</li>
 <li><a href="#exportingData">Data export</a> in JSON format</li>
 </ul>
@@ -42,7 +43,7 @@
 <li>Use the play, pause, seek, speed, and repeat controls at the bottom to control the animation timeline.</li>
 </ol>
 </p>
-<p>See the tutorial ("Help" &rightarrow; "Tutorial" from the top-left menu) inside the software for additional help getting started.</p>
+<p>See the tutorial ("Help" &raquo; "Tutorial" from the top-left menu) inside the software for additional help getting started.</p>
 
 <h2><a name="browsers"></a>Recommended browsers</h2>
 <p>We recommend using <a href="http://www.google.com/chrome">Chrome</a>. WholeCellViz was developed and extensively tested using Chrome on Windows 7. See the <a href="#implementation">implementation</a> section below for further information on browser compatibility.</p>
@@ -158,7 +159,7 @@
 <h2><a name="config"></a>Configuring panels</h2>
 <p>To configure the displayed visualizations:
 <ol>
-<li>Open the configuration editor by selecting "Edit" &rightarrow; "Panels" from the top-left menu.</li>
+<li>Open the configuration editor by selecting "Edit" &raquo; "Panels" from the top-left menu.</li>
 <li>Select the desired grid size (number of rows and columns of panels, each of which can contain one structured visualization or one set of time series plots).</li>
 <li>Use the "Configure panel" select box to choose the panel you wish to configure.</li>
 <li>Use the "Simulation" select box to choose a simulation to plot.</li>
@@ -187,22 +188,25 @@
 <p>Click the <span class="ui-icon ui-icon-tag"></span> icon at the bottom-right of the screen to toggle on/off visualization labels (e.g. metabolite, gene, protein, reaction names).</p>
 
 <h2><a name="userInteraction"></a>Turning on/off tooltips, clicks</h2>
-<p>To turn on/off user interaction (tooltips and mouse clicks) with the structured visualizations: (1) open the configuration editor by selecting "Edit" &rightarrow; "User interaction" from the top-left menu and (2) toggle the select boxes.</p>
+<p>To turn on/off user interaction (tooltips and mouse clicks) with the structured visualizations: (1) open the configuration editor by selecting "Edit" &raquo; "User interaction" from the top-left menu and (2) toggle the select boxes.</p>
 
 <h2><a name="timeline"></a>Controling the timeline: play, pause, seek, speed, repeat</h2>
 <p>Click the controls in the bottom menu to play, pause, seek, speed up/down, and repeat animations. Click the <span class="ui-icon ui-icon-play"></span> button to play animations. Click the <span class="ui-icon ui-icon-pause"></span> button to pause animations. Click the <span class="ui-icon ui-icon-signal"></span> button to open a slider to select the animation speed. Drag the progress bar thumb to seek the animation to a desired time point. Click the <span class="ui-icon ui-icon-refresh"></span> icon to toggle animation looping on/off.</p>
 
+<h2><a name="importingData"></a>Importing data</h2>
+<p>To import data stored on another server other than <a href="http://wholecellviz.stanford.edu">WholeCellViz.stanford.edu</a>, select "Edit" &raquo; "Data source" from the top-left menu and then enter the data source URL. The URL must point to another server running the WholeCellViz server software. See the <a href="#localInstall">installation instructions</a> for more information.</p>
+
 <h2><a name="exportingGrapics"></a>Exporting graphics</h2>
-<p>To export the graphics currently plotted in WholeCellViz in <a href="http://en.wikipedia.org/wiki/Scalable_Vector_Graphics">SVG format</a> select "Download" &rightarrow; "Graphics (SVG)" from the top-left menu. SVG is common vector graphics format which can be edited by popular vector graphics editors such as <a href="http://www.adobe.com/products/illustrator.html">Illustrator</a> and <a href="http://inkscape.org/">Inkscape</a>.</p>
+<p>To export the graphics currently plotted in WholeCellViz in <a href="http://en.wikipedia.org/wiki/Scalable_Vector_Graphics">SVG format</a> select "Download" &raquo; "Graphics (SVG)" from the top-left menu. SVG is common vector graphics format which can be edited by popular vector graphics editors such as <a href="http://www.adobe.com/products/illustrator.html">Illustrator</a> and <a href="http://inkscape.org/">Inkscape</a>.</p>
 
 <h2><a name="exportingData"></a>Exporting data</h2>
-<p>To export the data currently plotted in WholeCellViz in <a href="http://www.json.org/">JSON format</a> select "Download" &rightarrow; "Data (JSON)" from the top-left menu. JSON is a very popular data interchange format supported by most modern programming languages.</p>
+<p>To export the data currently plotted in WholeCellViz in <a href="http://www.json.org/">JSON format</a> select "Download" &raquo; "Data (JSON)" from the top-left menu. JSON is a very popular data interchange format supported by most modern programming languages.</p>
 
 <h1><a name="advanced"></a>Advanced usage</h1>
 
 <h2><a name="externalData"></a>Working with external data</h2>
 <p>
-By default WholeCellViz is configured to read cached whole-cell simulation data stored at <a href="http://wholecell.stanford.edu/sim">wholecell.stanford.edu/sim</a>. To change the data source URL: (1) from the top menu click "Edit" &rightarrow; "Data source" and (2) enter the desired data source URL. Note: this URL must point to a location where all of the server-side WholeCellViz software is installed. See <a href="#localInstall">Installing WholeCellViz locally</a> section for further information.</p>
+By default WholeCellViz is configured to read cached whole-cell simulation data stored at <a href="http://wholecell.stanford.edu/sim">wholecell.stanford.edu/sim</a>. To change the data source URL: (1) from the top menu click "Edit" &raquo; "Data source" and (2) enter the desired data source URL. Note: this URL must point to a location where all of the server-side WholeCellViz software is installed. See <a href="#localInstall">Installing WholeCellViz locally</a> section for further information.</p>
 
 <h2><a name="newViz"></a>Adding new visualizations</h2>
 <p>To add a new structured visualization to WholeCellViz: (1) <a href="#localInstall">install WholeCellViz locally on your own machine</a>, (2) add a new subclass of the Visualization2D or Visualization3D classes to <tt>wholecellviz/js/WholeCellViz-visualizations.js</tt>, and (3) add a new entry to the WholeCellViz metadata MySQL database corresponding to the new visualization.</p>

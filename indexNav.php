@@ -20,6 +20,7 @@
 	<li><a href="#labels">View/hide labels</a></li>
 	<li><a href="#userInteraction">Tooltips, mouse clicks</a></li>
 	<li><a href="#timeline">Timeline controls</a></li>
+    <li><a href="#importingData">Importing data</a></li>
 	<li><a href="#exportingGrapics">Exporting graphics</a></li>
 	<li><a href="#exportingData">Exporting data</a></li>
 	</ul>
