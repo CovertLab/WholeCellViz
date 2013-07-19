@@ -214,7 +214,7 @@ By default WholeCellViz is configured to read cached whole-cell simulation data 
 <h2><a name="localInstall"></a>Installing WholeCellViz locally</h2>
 <p>The easiest way to run the WholeCellViz software locally is to <a href="https://simtk.org/project/xml/downloads.xml?group_id=714#package_id1169">download the Whole-cell virtual machine posted at SimTK</a>. Installation and usage instructions are also posted at SimTK. The virtual machine is a virtual <a href="http://www.linuxmint.com/">Mint Linux</a> machine for use with the free <a href="https://www.virtualbox.org/">VirtualBox</a> software. The virtual machine includes WholeCellViz as well as the simulation software and WholeCellKB. The virtual machine can be used to run new whole-cell simulations, analyze new simulations using WholeCellViz, and add new structured visualizations to WholeCelLViz.</p>
 
-<p>To install WholeCellViz on your own machine: (1) download the <a href="https://simtk.org/frs/download.php?file_id=3619">WholeCellViz source code from SimTK</a>, and (2) follow the installation instructions posted in the <a href="https://simtk.org/frs/download.php?file_id=3485">Developer's Guide at SimTK</a>.</p>
+<p>To install WholeCellViz on your own machine: (1) download the <a href="https://simtk.org/project/xml/downloads.xml?group_id=714#package_id1307">WholeCellViz source code from SimTK</a>, and (2) follow the installation instructions posted in the <a href="https://simtk.org/frs/download.php?file_id=3485">Developer's Guide at SimTK</a>.</p>
 
 <h2><a name="runSims"></a>Running simulations</h2>
 <p>
