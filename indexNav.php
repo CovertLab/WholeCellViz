@@ -33,7 +33,11 @@
 	<li><a href="#runSims">Running simulations</a></hli>
 	</ul>
 	</li>
-<li><a href="#downloading">Downloading software</a></li>
+<li><a href="#downloading">Downloading software</a>
+	<ul>
+	<li><a href="#license">MIT license</a></li>
+	</ul>
+	</li>
 <li><a href="#citing">Citing WholeCellViz</a></li>
 <li><a href="#team">Development team</a></li>
 <li><a href="#implementation">Implementation</a></li>

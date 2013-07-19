@@ -212,7 +212,7 @@ By default WholeCellViz is configured to read cached whole-cell simulation data 
 <p>To add a new structured visualization to WholeCellViz: (1) <a href="#localInstall">install WholeCellViz locally on your own machine</a>, (2) add a new subclass of the Visualization2D or Visualization3D classes to <tt>wholecellviz/js/WholeCellViz-visualizations.js</tt>, and (3) add a new entry to the WholeCellViz metadata MySQL database corresponding to the new visualization.</p>
 
 <h2><a name="localInstall"></a>Installing WholeCellViz locally</h2>
-<p>The easiest way to run the WholeCellViz software locally is to <a href="http://simtk.org/home/wholecell">download the Whole-cell virtual machine posted at SimTK</a>. Installation and usage instructions are also posted at SimTK. The virtual machine is a virtual <a href="http://www.linuxmint.com/">Mint Linux</a> machine for use with the free <a href="https://www.virtualbox.org/">VirtualBox</a> software. The virtual machine includes WholeCellViz as well as the simulation software and WholeCellKB. The virtual machine can be used to run new whole-cell simulations, analyze new simulations using WholeCellViz, and add new structured visualizations to WholeCelLViz.</p>
+<p>The easiest way to run the WholeCellViz software locally is to <a href="https://simtk.org/project/xml/downloads.xml?group_id=714#package_id1169">download the Whole-cell virtual machine posted at SimTK</a>. Installation and usage instructions are also posted at SimTK. The virtual machine is a virtual <a href="http://www.linuxmint.com/">Mint Linux</a> machine for use with the free <a href="https://www.virtualbox.org/">VirtualBox</a> software. The virtual machine includes WholeCellViz as well as the simulation software and WholeCellKB. The virtual machine can be used to run new whole-cell simulations, analyze new simulations using WholeCellViz, and add new structured visualizations to WholeCelLViz.</p>
 
 <p>To install WholeCellViz on your own machine: (1) download the <a href="https://simtk.org/frs/download.php?file_id=3619">WholeCellViz source code from SimTK</a>, and (2) follow the installation instructions posted in the <a href="https://simtk.org/frs/download.php?file_id=3485">Developer's Guide at SimTK</a>.</p>
 
@@ -221,7 +221,28 @@ By default WholeCellViz is configured to read cached whole-cell simulation data 
 See <a href="http://wholecell.stanford.edu">wholecell.stanford.edu</a> for further information about installing and running the whole-cell simulation software.</p>
 
 <h1><a name="downloading"></a>Downloading WholeCellViz</h1>
-<p>The WholeCellViz source code and simulated data are freely available at <a href="http://simtk.org/project/xml/downloads.xml?group_id=714">SimTK</a>.</p>
+<p>The WholeCellViz source code and simulated data are freely available under the MIT license at <a href="https://simtk.org/project/xml/downloads.xml?group_id=714#package_id1307">SimTK</a>.</p>
+
+<h2><a name="license"></a>MIT license</h2>
+<p>Copyright (c) 2013 Stanford University</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy 
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.</p>
 
 <h1><a name="citing"></a>Citing WholeCellViz</h1>
 <p>Please use the following references to cite WholeCellViz:</p>
