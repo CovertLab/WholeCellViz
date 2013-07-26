@@ -868,15 +868,15 @@ $.widget("wholecellviz.config", $.ui.dialog, {
 			
 		($('<div class="section"><h4>Width (cm)</h4><input class="exportWidthInput" value="17.8"/></div></div>'))
 			.appendTo(this.exportPanel);
-		(this.exportWidthInput = this.exportPanel.find('.exportWidthInput')).numeric({ decimal: true, negative: false });
+		(this.exportWidthInput = this.exportPanel.find('.exportWidthInput')).numeric({ decimal: '.', negative: false });
 		
 		($('<div class="section"><h4>Height (cm)</h4><input class="exportHeightInput" value="24.0"/></div></div>'))
 			.appendTo(this.exportPanel);
-		(this.exportHeightInput = this.exportPanel.find('.exportHeightInput')).numeric({ decimal: true, negative: false });
+		(this.exportHeightInput = this.exportPanel.find('.exportHeightInput')).numeric({ decimal: '.', negative: false });
 		
 		($('<div class="section"><h4>Panel margin (cm)</h4><input class="exportPanelMarginInput" value="0.5"/></div></div>'))
 			.appendTo(this.exportPanel);
-		(this.exportPanelMarginInput = this.exportPanel.find('.exportPanelMarginInput')).numeric({ decimal: true, negative: false });
+		(this.exportPanelMarginInput = this.exportPanel.find('.exportPanelMarginInput')).numeric({ decimal: '.', negative: false });
 		
 		($('<div class="section"><h4>Display panel labels</h4><select class="exportShowPanelLabelsSelector"></select></div></div>'))
 			.appendTo(this.exportPanel);
