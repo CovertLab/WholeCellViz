@@ -2717,16 +2717,36 @@ var TranslationVisualization = ChromosomeMapVisualization.extend({
 	
 	drawColorScale: function(x, y, w, h, cLo, cHi, noShowBlack, labelLo, labelHi, nSegments){
 		this.drawObject({
+			fillStyle: '#222222',
+			data: {'x': x, 'y': y, 'w': w},
+			drawFunc: function (self, ctx, data) {
+				var w = data.w - 3 - ctx.measureText('>1').width;
+				ctx.font = self.smallFontSize + "px " + self.fontFamily;
+				ctx.fillText('1', data.x + data.w - ctx.measureText('1').width, 
+					data.y + w/2);
+			},
+		});
+		
+		this.drawObject({
 			strokeStyle: '#222222', 
 			fillStyle: '#3d80b3',
 			data: {'x': x, 'y': y, 'w': w},
 			drawFunc: function (self, ctx, data) {
 				var w = data.w - 3 - ctx.measureText('>1').width;
-			
-				ctx.font = self.smallFontSize + "px " + self.fontFamily;
-				ctx.strokeText('1', data.x + data.w - ctx.measureText('1').width, 
-					data.y + w/2);
 				ctx.rect(data.x, data.y, w, w);
+			},
+		});
+		
+		this.drawObject({
+			fillStyle: '#222222',
+			data: {'x': x, 'y': y, 'w': w},
+			drawFunc: function (self, ctx, data) {
+				var w = data.w - 3 - ctx.measureText('>1').width;
+				var spcg = 3/2 * w;
+				
+				ctx.font = self.smallFontSize + "px " + self.fontFamily;
+				ctx.fillText('>1', data.x + data.w - ctx.measureText('>1').width, 
+					data.y + w/2 + spcg);
 			},
 		});
 		
@@ -2737,10 +2757,6 @@ var TranslationVisualization = ChromosomeMapVisualization.extend({
 			drawFunc: function (self, ctx, data) {
 				var w = data.w - 3 - ctx.measureText('>1').width;
 				var spcg = 3/2 * w;
-				
-				ctx.font = self.smallFontSize + "px " + self.fontFamily;
-				ctx.strokeText('>1', data.x + data.w - ctx.measureText('>1').width, 
-					data.y + w/2 + spcg);
 				ctx.rect(data.x, data.y + spcg, w, w);
 			},
 		});
