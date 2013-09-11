@@ -455,6 +455,149 @@ function loadConfiguration(){
 		case '#RepInit': loadOneVisualization('2011_10_19_02_53_45_1', 17, 13828); break;
 		case '#Translation': loadOneVisualization('2011_10_19_02_53_45_1', 12, 13829); break;		
 		
+		//stephen fortune Ababond Normal Devices Festival
+		case '#ANDFestival-1':
+			loadConfigurationHelper({
+				panels: {		
+					showMinimalMode: 0,
+					rows: 1, 
+					cols: 1, 
+					metadata: [[
+							{sim_id: '2011_10_19_02_53_45_1', class_id: 4, attr_id: 76}, //Cell shape visualization
+						]],
+				},
+				playback: {
+					repeat: true,
+					speed: 2000,
+				},
+				visualization: {
+					isClickResponsive: true,
+					isShowingTooltips: true,
+				},
+			});
+			break;
+		case '#ANDFestival-2':
+			loadConfigurationHelper({
+				panels: {		
+					showMinimalMode: 0,
+					rows: 2, 
+					cols: 2, 
+					metadata: [[
+							{sim_id: '2011_10_19_02_53_45_1', class_id: 4, attr_id: 76}, //Cell shape visualization
+						],[
+							{sim_id: '2011_10_19_02_53_45_1', class_id: 2, attr_id: 13832}, //Circular chromosome visualization
+						],[
+							{sim_id: '2011_10_19_02_53_45_1', class_id: 1, attr_id: 10}, //Summary: growth
+						],[
+							{sim_id: '2011_10_19_02_53_45_1', class_id: 13, attr_id: 13834}, // mature RNA expression visualization
+						]],
+				},
+				playback: {
+					repeat: true,
+					speed: 2000,
+				},
+				visualization: {
+					isClickResponsive: true,
+					isShowingTooltips: true,
+				},
+			});
+			break;
+		case '#ANDFestival-3':
+			loadConfigurationHelper({
+				panels: {		
+					showMinimalMode: 0,
+					rows: 4, 
+					cols: 4, 
+					metadata: [	
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 1, attr_id: 27}],// Chromosome DNA replication
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 2, attr_id: 13833}],// Chromosome DNA replication
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 2, attr_id: 57}],// Chromosome DNA replication- protein occupancy- methylation- & damage (graph)
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 17, attr_id: 13828}],// Replication initiation
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 3, attr_id: 70}],// FtsZ Ring FtsZ contractile ring
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 4, attr_id: 76}],// Geometry Cell shape
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 2, attr_id: 13832}],// Chromosome DNA replication- protein occupancy- methylation- & damage (circular)
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 1, attr_id: 55}],// Summary Superhelicity						
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 7, attr_id: 13831}],// Metabolic Reactions Metabolism
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 1, attr_id: 10}],// Wild-type #1 Summary growth 	 
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 13, attr_id: 13834}],// RNA Gene expression 	 
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 12, attr_id: 13829}],// Ribosomes Translation
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 13, attr_id: 13836}],// RNA Nascent RNA expression						
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 13, attr_id: 13827}],// RNA Mature RNA expression
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 10, attr_id: 13837}],// Protein Monomers Nascent protein monomer expression
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 10, attr_id: 13835}],// Protein Monomers Mature protein monomer expression						
+						],
+				},
+				playback: {
+					repeat: true,
+					speed: 2000,
+				},
+				visualization: {
+					isClickResponsive: true,
+					isShowingTooltips: true,
+				},
+			});
+			break;
+		case '#ANDFestival-4':
+			loadConfigurationHelper({
+				panels: {		
+					showMinimalMode: 0,
+					rows: 6, 
+					cols: 6, 
+					metadata: [	
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 1, attr_id: 30}], //Chromosome copy number
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 13, attr_id: 11229}], //RNA TU_003 (mature)
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 10, attr_id: 5134}], //Protein Monomers MG_006_MONOMER (mature)
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 9, attr_id: 1725}], //Protein Complexes MG_006_DIMER (mature)
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 7, attr_id: 469}], //Metabolic Reactions Tmk
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 1, attr_id: 46}], //Total Rna
+			
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 13, attr_id: 11244}], //RNA TU_017 (mature)
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 1, attr_id: 27}],// Chromosome DNA replication
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 2, attr_id: 13833}],// Chromosome DNA replication
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 2, attr_id: 57}],// Chromosome DNA replication- protein occupancy- methylation- & damage (graph)
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 17, attr_id: 13828}],// Replication initiation
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 13, attr_id: 11232}], //RNA TU_006 (mature)
+						
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 10, attr_id: 5160}], //Protein Monomers MG_034_MONOMER (mature) 
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 3, attr_id: 70}],// FtsZ Ring FtsZ contractile ring
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 4, attr_id: 76}],// Geometry Cell shape
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 2, attr_id: 13832}],// Chromosome DNA replication- protein occupancy- methylation- & damage (circular)
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 1, attr_id: 55}],// Summary Superhelicity						
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 10, attr_id: 5141}], //Protein Monomers MG_013_MONOMER (mature)
+						
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 9, attr_id: 1735}], //Protein Complexes MG_034_DIMER (mature)
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 7, attr_id: 13831}],// Metabolic Reactions Metabolism
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 1, attr_id: 10}],// Wild-type #1 Summary growth 	 
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 13, attr_id: 13834}],// RNA Gene expression 	 
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 12, attr_id: 13829}],// Ribosomes Translation
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 9, attr_id: 1727}], //Protein Complexes MG_013_DIMER (mature)
+						
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 7, attr_id: 462}], //Metabolic Reactions Tdk1 
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 13, attr_id: 13836}],// RNA Nascent RNA expression						
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 13, attr_id: 13827}],// RNA Mature RNA expression
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 10, attr_id: 13837}],// Protein Monomers Nascent protein monomer expression
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 10, attr_id: 13835}],// Protein Monomers Mature protein monomer expression
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 7, attr_id: 233}], //Metabolic Reactions FolD1 
+												
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 1, attr_id: 31}], //Total protein monomer
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 13, attr_id: 11362}], //RNA TU_133 (mature)
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 10, attr_id: 5349}], //Protein Monomers MG_216_MONO
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 9, attr_id: 1797}], //Protein Complexes MG_216_TETRAMER (mature)
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 7, attr_id: 440}], //Metabolic Reactions Pyk_CDP
+						[{sim_id: '2011_10_19_02_53_45_1', class_id: 1, attr_id: 34}], //Total Protein complex
+						],
+				},
+				playback: {
+					repeat: true,
+					speed: 2000,
+				},
+				visualization: {
+					isClickResponsive: true,
+					isShowingTooltips: true,
+				},
+			});
+			break;
+		
 		//default
 		default:
 			if (window.location.hash != '' && window.location.hash != '#'){
@@ -468,7 +611,7 @@ function loadConfiguration(){
 				}
 			}
 			loadConfigurationHelper({
-				panels: {
+				panels: {					
 					rows: 2, 
 					cols: 3, 
 					metadata: [[
@@ -529,6 +672,9 @@ function loadConfigurationHelper(config){
 	$('#config').find('.isShowingTooltipsSelector').val(config.visualization.isShowingTooltips);
 	
 	//layout panels
+	if (config.panels.showMinimalMode == 'undefined')
+		config.panels.showMinimalMode = 0;
+	$('#config').config('setMinimalMode', config.panels.showMinimalMode);
 	$('#config').config('setNumPanelRows', config.panels.rows);
 	$('#config').config('setNumPanelCols', config.panels.cols);
 	layoutPanels(true);
@@ -580,13 +726,16 @@ function layoutPanels(deleteAllPanels) {
 	
 	//layout panels
 	var container = $("#container");
-	var top = container.position().top
+	var left = container.position().left;
+	var top = container.position().top;
 	var width = container.width();
 	var height = container.height();
 
-	var panelMargin = 10;
-	var panelWidth = (width - (num_cols + 1) * panelMargin) / num_cols;
-	var panelHeight = (height - (num_rows + 1) * panelMargin) / num_rows;
+	var margins = $('#config').config('getMargins');
+	var panelVertMargin = margins.panelVertMargin;
+	var panelHorzMargin = margins.panelHorzMargin;
+	var panelWidth = (width - (num_cols + 1) * panelHorzMargin) / num_cols;
+	var panelHeight = (height - (num_rows + 1) * panelVertMargin) / num_rows;
 	
 	for (var i = 0; i < num_rows; i++){
 		for (var j = 0; j < num_cols; j++){
@@ -595,8 +744,8 @@ function layoutPanels(deleteAllPanels) {
 			$("#panel" + (i * num_cols + j + 1))
 				.panel({
 					position: [
-						panelMargin + j * (panelMargin + panelWidth),
-						top + panelMargin + 4 + i * (panelMargin + panelHeight),
+						left + panelHorzMargin + j * (panelHorzMargin + panelWidth),
+						top + panelVertMargin + i * (panelVertMargin + panelHeight),
 						],
 					});
 		}
@@ -641,7 +790,10 @@ $.widget("wholecellviz.config", $.ui.dialog, {
 		position: 'center',
 		width: 590,
 		height: 496,
+		showMinimalMode: 0,
 		showLabels: false,
+		panelVertMargin: 8,
+		panelHorzMargin: 10,
 		dataSourceBaseUrl: '', //URL to WholeCellDB instance		
 	},
 	
@@ -670,9 +822,9 @@ $.widget("wholecellviz.config", $.ui.dialog, {
 		//data panels config
 		$('<h3><a>Data panels</a></h3>').appendTo(this.accordion);
 		(this.dataPanel = $('<div></div>'))
-			.appendTo(this.accordion);
+			.appendTo(this.accordion);			
 		
-		($('<div class="section"><h4>Panel grid size</h4><input type="text" class="num_panel_rows spinner"/> &times; <input type="text" class="num_panel_cols spinner"/></div>'))
+		($('<div class="section" style="margin-top:15px;"><h4>Panel grid size</h4><input type="text" class="num_panel_rows spinner"/> &times; <input type="text" class="num_panel_cols spinner"/></div>'))
 			.appendTo(this.dataPanel);
 		(this.numPanelRowsInput = this.dataPanel.find(".num_panel_rows"))
 			.val(1)
@@ -830,7 +982,7 @@ $.widget("wholecellviz.config", $.ui.dialog, {
 			.appendTo(this.playbackPanel);
 		(this.frameRateInput = this.playbackPanel.find('.frameRateInput'));
 		
-		//visualization config
+		//user interaction
 		$('<h3><a>User interaction</a></h3>').appendTo(this.accordion);
 		(this.userInteractionPanel = $('<div></div>'))
 			.appendTo(this.accordion);
@@ -878,12 +1030,22 @@ $.widget("wholecellviz.config", $.ui.dialog, {
 			.appendTo(this.exportPanel);
 		(this.exportPanelMarginInput = this.exportPanel.find('.exportPanelMarginInput')).numeric({ decimal: '.', negative: false });
 		
-		($('<div class="section"><h4>Display panel labels</h4><select class="exportShowPanelLabelsSelector"></select></div></div>'))
+		($('<div class="section"><h4>Display subfigure labels</h4><select class="exportShowSubfigureLabelsSelector"></select></div></div>'))
 			.appendTo(this.exportPanel);
-		(this.exportShowPanelLabelsSelector = this.exportPanel.find('.exportShowPanelLabelsSelector'))
+		(this.exportShowSubfigureLabelsSelector = this.exportPanel.find('.exportShowSubfigureLabelsSelector'))
 			.append($('<option value="1">Yes</option>'))
 			.append($('<option value="0">No</option>'))
 			.val(1);
+			
+		($('<div class="section"><h4>Use minimal mode</h4><select class="showMinimalModeSelector"></select></div></div>'))
+			.appendTo(this.exportPanel);
+		(this.showMinimalModeSelector = this.exportPanel.find('.showMinimalModeSelector'))
+			.append($('<option value="1">Yes</option>'))
+			.append($('<option value="0">No</option>'))
+			.val(0)
+			.bind("change", function(){
+				$('#config').config('setMinimalMode', $(this).val());
+			});
 			
 		//activate accordion
 		this.accordion.accordion({
@@ -1078,6 +1240,7 @@ $.widget("wholecellviz.config", $.ui.dialog, {
 		
 		return {
 			panels: {
+				showMinimalMode: this.getMinimalMode(),
 				rows: this.getNumPanelRows(),
 				cols: this.getNumPanelCols(),
 				metadata: allPanelsMetadata.slice(0, maxPanel),
@@ -1100,6 +1263,82 @@ $.widget("wholecellviz.config", $.ui.dialog, {
 		this.setUpdatingHash(true);
 		
 		window.location.hash = JSON.stringify(this.getModifiedConfig(updatingPanelNum, updatingPanelMetadata));
+	},
+	
+	setMinimalMode: function (val) {
+		this.options.showMinimalMode = val;
+		if ($('.showMinimalModeSelector').val() != val)
+			$('.showMinimalModeSelector').val(val);
+		
+		var styleSheet = document.styleSheets[document.styleSheets.length - 1];
+		var rules = new Array();
+		if (styleSheet.cssRules)
+			rules = styleSheet.cssRules;
+		else if (styleSheet.rules)
+			rules = styleSheet.rules;
+			
+		var panelTitleRule = undefined;
+		var panelDataTitleRule = undefined;
+		var panelSimTitleRule = undefined;
+		var panelButtonsRule = undefined;
+		var containerRule = undefined;
+		for (var i = 0; i < rules.length; i++){
+			if (rules[i].selectorText == '.panel .ui-dialog-titlebar')
+				panelTitleRule = rules[i];
+			if (rules[i].selectorText == '.panel .ui-dialog-title .dataTitle')
+				panelDataTitleRule = rules[i];
+			if (rules[i].selectorText == '.panel .ui-dialog-title .simTitle')
+				panelSimTitleRule = rules[i];
+			if (rules[i].selectorText == '.panel .ui-dialog-titlebar .buttons')
+				panelButtonsRule = rules[i];
+			if (rules[i].selectorText == '#container')
+				containerRule = rules[i];
+		}
+		
+		if (val == 1) {
+			$('#header').hide();			
+			if (panelTitleRule) panelTitleRule.style.height = '12px';
+			if (panelDataTitleRule) panelDataTitleRule.style.fontWeight = 'bold';
+			if (panelSimTitleRule) panelSimTitleRule.style.display = 'none';
+			if (panelButtonsRule) panelButtonsRule.style.display = 'none';
+			$('#timeline').hide();
+			if (containerRule){
+				containerRule.style.top = '-9px';
+				containerRule.style.bottom = '-10px';
+				containerRule.style.left = '-9px';
+				containerRule.style.right = '-8px';
+			}
+			this.options.panelVertMargin = 5;
+			this.options.panelHorzMargin = 9;
+		} else {
+			$('#header').show();
+			if (panelTitleRule) panelTitleRule.style.height = '26px';	
+			if (panelDataTitleRule) panelDataTitleRule.style.fontWeight = 'normal';
+			if (panelSimTitleRule) panelSimTitleRule.style.display = 'block';
+			if (panelButtonsRule) panelButtonsRule.style.display = 'block';
+			$('#timeline').show();
+			if (containerRule){
+				containerRule.style.top = '66px';
+				containerRule.style.bottom = '27px';
+				containerRule.style.left = '0px';
+				containerRule.style.right = '0x';
+			}
+			this.options.panelVertMargin = 8;
+			this.options.panelHorzMargin = 10;
+		}
+				
+		$('#config').config('updateLocationHash');
+		layoutPanels();
+	},
+	getMinimalMode: function () {
+		return  this.options.showMinimalMode;		
+	},
+		
+	getMargins: function() {
+		return {
+			panelVertMargin: this.options.panelVertMargin,
+			panelHorzMargin: this.options.panelHorzMargin
+		};
 	},
 	
 	getShowLabels: function(){
@@ -3685,7 +3924,7 @@ var exportSvg = function(){
 	var config = $('#config');
 	var nRows = config.config('getNumPanelRows');
 	var nCols = config.config('getNumPanelCols');		
-	var totW, totH, panelMargin, colW, colH, showPanelLabels;
+	var totW, totH, panelMargin, colW, colH, showSubfigureLabels;
 	
 	panelMargin = parseFloat(config.find('.exportPanelMarginInput').val());
 	
@@ -3695,7 +3934,7 @@ var exportSvg = function(){
 	totH = parseFloat(config.find('.exportHeightInput').val());
 	colH = (totH - (nRows - 1) * panelMargin) / nRows;
 	
-	showPanelLabels = parseInt(config.find('.exportShowPanelLabelsSelector').val());
+	showSubfigureLabels = parseInt(config.find('.exportShowSubfigureLabelsSelector').val());
 	
 	var canvasCtx = $('<canvas />').get(0).getContext('2d');
 	
@@ -3711,7 +3950,7 @@ var exportSvg = function(){
 	for (var i = 0; i < nRows; i++){
 		for (var j = 0; j < nCols; j++){
 			var panelLabel = '';
-			if (showPanelLabels){
+			if (showSubfigureLabels){
 				var idx = i * nCols + j + 1;
 				var lbl = '';
 				while (idx > 0){

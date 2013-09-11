@@ -212,7 +212,7 @@ var CellShapeVisualization = Visualization2D.extend({
 	
 	drawCellMeasurements: function(data){
 		this.drawObject({
-			isLabel:true,
+			isLabel:false,
 			'strokeStyle': this.lineColor,
 			'fillStyle': this.lineColor,
 			'data': data,
@@ -296,7 +296,7 @@ var CellShapeVisualization = Visualization2D.extend({
 		});
 		
 		this.drawObject({
-			isLabel:true,
+			isLabel:false,
 			'fillStyle': this.textColor,
 			'data': data,
 			drawFunc: function(self, ctx, data){

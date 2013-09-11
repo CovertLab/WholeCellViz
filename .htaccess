@@ -8,6 +8,7 @@ RewriteBase		/
 RewriteRule		^LeeEtAl2013$		viz.php#LeeEtAl2013 [NE,L,NC,R]
 RewriteRule		^LeeEtAl2013Fig1$	viz.php#LeeEtAl2013Fig1 [NE,L,NC,R]
 RewriteRule		^LeeEtAl2013FigS1$	viz.php#LeeEtAl2013FigS1 [NE,L,NC,R]
+
 RewriteRule		^cellGrowth$		viz.php#cellGrowth [NE,L,NC,R]
 RewriteRule		^cellCycle$			viz.php#cellCycle [NE,L,NC,R]
 RewriteRule		^replication$ 		viz.php#replication [NE,L,NC,R]
@@ -30,3 +31,8 @@ RewriteRule		^MatureProtExp$		viz.php#MatureProtExp [NE,L,NC,R]
 RewriteRule		^MatureRnaExp$		viz.php#MatureRnaExp [NE,L,NC,R]
 RewriteRule		^RepInit$			viz.php#RepInit [NE,L,NC,R]
 RewriteRule		^Translation$		viz.php#Translation [NE,L,NC,R]
+
+RewriteRule		^ANDFestival-1$		viz.php#ANDFestival-1 [NE,L,NC,R]
+RewriteRule		^ANDFestival-2$		viz.php#ANDFestival-2 [NE,L,NC,R]
+RewriteRule		^ANDFestival-3$		viz.php#ANDFestival-3 [NE,L,NC,R]
+RewriteRule		^ANDFestival-4$		viz.php#ANDFestival-4 [NE,L,NC,R]

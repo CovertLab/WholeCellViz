@@ -289,10 +289,10 @@ ul{
 #container {
 	z-index:1;
 	position:absolute;
-	top:65px;
+	top:66px;
 	left:0px;
 	right:0px;
-	bottom:34px;
+	bottom:27px;
 	padding:0px;
 	margin:0px;
 }
@@ -342,22 +342,22 @@ ul{
 .panel .ui-dialog-titlebar-close {
 	display: none;
 }
-.panel  .ui-dialog-titlebar .buttons{	
+.panel .ui-dialog-titlebar .buttons{	
 	position: absolute; 
 	right:4px;
 	top: 4px;
 }
-.panel  .ui-dialog-titlebar .buttons a{
+.panel .ui-dialog-titlebar .buttons a{
 	float:right;
 	padding: 1px;
 	height: 18px;
 	width: 19px;
 }
-.panel  .ui-dialog-titlebar .buttons a span {
+.panel .ui-dialog-titlebar .buttons a span {
 	display: block;
 	margin: 1px;	
 }
-.panel  .ui-dialog-titlebar .buttons a:hover{
+.panel .ui-dialog-titlebar .buttons a:hover{
 	padding: 0;
 }
 
@@ -410,6 +410,7 @@ ul{
 	border-bottom:none;
 	border-right:none;
 	border-left:none;
+	margin:0px;
 }
 
 #timeline .playPauseButton, #timeline .repeatButton, #timeline .speedButton, #timeline .showLabelsButton, #timeline .configButton{	
