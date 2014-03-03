@@ -247,7 +247,7 @@ THE SOFTWARE.</p>
 <h1><a name="citing"></a>Citing WholeCellViz</h1>
 <p>Please use the following references to cite WholeCellViz:</p>
 <ol>
-<li>Lee R<sup>*</sup>, Karr JR<sup>*</sup>, Covert MW. WholeCellViz: Data Visualization for Whole-Cell Models. <i>BMC Bioinformatics</i> 14, 253 (2013). <a href="http://www.cell.com/abstract/S0092-8674(12)00776-3">Cell</a> | <a href="http://www.ncbi.nlm.nih.gov/pubmed/23964998">PubMed</a> | <a href="http://simtk.org/home/wholecell">SimTK</a></li>
+<li>Lee R<sup>*</sup>, Karr JR<sup>*</sup>, Covert MW. WholeCellViz: Data Visualization for Whole-Cell Models. <i>BMC Bioinformatics</i> 14, 253 (2013). <a href="http://www.biomedcentral.com/1471-2105/14/253">BMC Bioinformatics</a> | <a href="http://www.ncbi.nlm.nih.gov/pubmed/23964998">PubMed</a> | <a href="http://simtk.org/home/wholecell">SimTK</a></li>
 <li>Karr JR et al. A Whole-Cell Computational Model Predicts Phenotype from Genotype. <i>Cell</i> 150 <b>2</b>, 389-401 (2012). <a href="http://www.cell.com/abstract/S0092-8674(12)00776-3">Cell</a> | <a href="http://www.ncbi.nlm.nih.gov/pubmed/22817898">PubMed</a> | <a href="http://simtk.org/home/wholecell">SimTK</a></li>
 </ol>
 
